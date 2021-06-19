@@ -1,12 +1,12 @@
 import { BrowserRouter as Router } from "react-router-dom";
 
 import Routes from "Routes";
-import Header from "components/header";
+import Navbar from "components/navbar";
 
 function App() {
   return (
     <Router>
-      <Header />
+      <Navbar />
       <div className="container">
         <Routes />
       </div>

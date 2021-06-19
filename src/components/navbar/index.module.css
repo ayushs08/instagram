@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--l-spacing);
+  margin-bottom: var(--xl-spacing);
   background: var(--white);
 }
 
@@ -22,5 +22,6 @@
   .container {
     padding: var(--s-spacing) var(--xs-spacing) var(--xs-spacing)
       var(--m-spacing);
+    margin-bottom: var(--l-spacing);
   }
 }

@@ -1,0 +1,137 @@
+.container {
+  display: grid;
+  grid-template-areas:
+    "picture basicInfo"
+    "picture bio"
+    "cta cta";
+  gap: 0 calc(var(--s-spacing) * 10);
+}
+
+.profilePic {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--dark-gray);
+  grid-area: picture;
+  margin-left: calc(var(--s-spacing) * 11);
+}
+
+.basicInfo {
+  grid-area: basicInfo;
+}
+
+.usernameContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--l-spacing);
+}
+
+.username {
+  margin: unset;
+  font-weight: var(--light);
+  margin-right: var(--l-spacing);
+}
+
+.follow {
+  background: var(--blue);
+  border: unset;
+  padding: var(--xs-spacing) var(--l-spacing);
+  border-radius: 4px;
+  color: var(--white);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.list {
+  display: flex;
+  grid-area: count;
+}
+
+.listItem {
+  display: flex;
+  justify-content: center;
+  margin-right: calc(var(--s-spacing) * 4);
+}
+
+.listItem .semiBold {
+  margin-right: var(--xs-spacing);
+}
+
+.semiBold {
+  font-weight: var(--semi-bold);
+}
+
+.fullName {
+  margin-top: unset;
+  margin-bottom: var(--s-spacing);
+}
+
+.bioContainer {
+  margin-top: var(--xl-spacing);
+  grid-area: bio;
+  line-height: 1.25;
+  margin-right: calc(var(--s-spacing) * 11);
+}
+
+.ctaContainer {
+  padding: var(--s-spacing);
+  border: 1px solid var(--dark-gray);
+  border-left: unset;
+  border-right: unset;
+  grid-area: cta;
+  text-align: center;
+  margin-top: calc(var(--s-spacing) * 5);
+}
+
+.cta {
+  color: var(--blue);
+  font-size: var(--large-font-size);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: auto;
+    grid-template-areas:
+      "picture basicInfo"
+      "bio bio"
+      "cta cta";
+    gap: var(--xl-spacing) var(--l-spacing);
+    grid-template-columns: 80px 1fr;
+  }
+
+  .profilePic {
+    width: 80px;
+    height: 80px;
+    margin: unset;
+  }
+
+  .usernameContainer {
+    display: block;
+  }
+
+  .follow {
+    width: 100%;
+    margin-top: var(--s-spacing);
+  }
+
+  .list {
+    justify-content: space-between;
+    margin: unset;
+  }
+
+  .listItem {
+    display: block;
+    margin: unset;
+  }
+
+  .bioContainer {
+    margin: unset;
+  }
+
+  .ctaContainer {
+    margin-top: unset;
+    width: 100vw;
+    margin-left: -15px;
+  }
+}

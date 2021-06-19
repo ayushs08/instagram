@@ -16,7 +16,7 @@ export default function Header() {
       <img src={Logo} alt="Instagram" height="29" />
       <div className={styles.flex}>
         <Icon src={ThemeMode} alt="" width="22" className={styles.icon} />
-        <Link to={buildURL(routePaths.profile, { user: "chief" })}>
+        <Link to={buildURL(routePaths.profile, { user: "unsplash" })}>
           <Icon src={User} alt="" width="22" />
         </Link>
       </div>

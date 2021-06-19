@@ -1,9 +1,6 @@
 :root {
   --width: 1024px;
 
-  /* Breakpoints */
-  --phone: 768px;
-
   /* Spacing */
   --xs-spacing: 5px;
   --s-spacing: 10px;
@@ -15,6 +12,20 @@
   --white: #fff;
   --dark-gray: #dbdbdb;
   --gray: #fafafa;
+  --blue: #0095f6;
+  --dark-blue: #005992;
+
+  /* Font Weights */
+  --bold: 700;
+  --semi-bold: 600;
+  --regular: 400;
+  --light: 300;
+
+  /* Font Sizes */
+  --large-font-size: 18px;
+  --regular-font-size: 16px;
+  --medium-font-size: 14px;
+  --small-font-size: 12px;
 }
 
 body {
@@ -30,6 +41,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+ul {
+  padding: unset;
+  list-style-type: none;
+}
+
+a {
+  color: var(--dark-blue);
+  font-weight: var(--semi-bold);
+  text-decoration: none;
 }
 
 .container {
