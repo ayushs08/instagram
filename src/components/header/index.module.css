@@ -1,0 +1,26 @@
+.container {
+  padding: var(--s-spacing) calc((100vw - var(--width)) / 2) var(--xs-spacing);
+  border-bottom: 1px solid var(--dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--l-spacing);
+  background: var(--white);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin-right: var(--s-spacing);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--s-spacing) var(--xs-spacing) var(--xs-spacing)
+      var(--m-spacing);
+  }
+}

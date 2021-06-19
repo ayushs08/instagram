@@ -1,12 +1,12 @@
-import React from "react";
+import { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import routePaths from "routePaths";
 
 import buildURL from "utils/buildURL";
 
-import Profile from "pages/Profile";
-import Post from "pages/Post";
+const Profile = lazy(() => import("pages/Profile"));
+const Post = lazy(() => import("pages/Post"));
 
 export default function Routes() {
   return (
@@ -16,8 +16,10 @@ export default function Routes() {
         from="/"
         to={buildURL(routePaths.profile, { user: "chief" })}
       />
-      <Route exact path={routePaths.profile} component={Profile} />
-      <Route exact path={routePaths.post} component={Post} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Route exact path={routePaths.profile} component={Profile} />
+        <Route exact path={routePaths.post} component={Post} />
+      </Suspense>
     </Switch>
   );
 }
