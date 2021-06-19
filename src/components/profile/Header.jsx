@@ -29,7 +29,7 @@ function Header(props) {
       <LazyLoad className={styles.profilePic}>
         <img src={profilePicURL} alt="" width="100%" height="100%" />
       </LazyLoad>
-      <div className={styles.basicInfo}>
+      <div className={styles.info}>
         <div className={styles.usernameContainer}>
           <h1 className={styles.username}>{username}</h1>
           <button className={cx(styles.follow, styles.semiBold)}>

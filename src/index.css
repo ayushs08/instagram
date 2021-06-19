@@ -43,7 +43,19 @@ code {
     monospace;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  background: unset;
+  border: unset;
+}
+
 ul {
+  margin: unset;
   padding: unset;
   list-style-type: none;
 }
@@ -57,10 +69,5 @@ a {
 .container {
   max-width: var(--width);
   margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 var(--m-spacing);
-  }
+  padding-bottom: var(--xl-spacing);
 }

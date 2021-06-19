@@ -1,8 +1,9 @@
 import userData from "data/user";
+import { useParams } from "react-router-dom";
 
 import MetaTitle from "components/MetaTitle";
 import Header from "components/profile/Header";
-import { useParams } from "react-router-dom";
+import PostsCollection from "components/profile/PostsCollection";
 
 export default function Profile() {
   const { user } = useParams();
@@ -31,6 +32,7 @@ export default function Profile() {
         profilePicURL={profilePicURL}
         username={username}
       />
+      <PostsCollection posts={posts} />
     </>
   );
 }

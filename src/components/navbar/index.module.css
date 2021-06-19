@@ -20,8 +20,7 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: var(--s-spacing) var(--xs-spacing) var(--xs-spacing)
-      var(--m-spacing);
-    margin-bottom: var(--l-spacing);
+    padding: var(--xs-spacing) var(--xs-spacing) 0 var(--m-spacing);
+    margin-bottom: var(--s-spacing);
   }
 }

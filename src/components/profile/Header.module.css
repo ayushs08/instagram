@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-template-areas:
-    "picture basicInfo"
+    "picture info"
     "picture bio"
     "cta cta";
   gap: 0 calc(var(--s-spacing) * 10);
@@ -17,8 +17,8 @@
   margin-left: calc(var(--s-spacing) * 11);
 }
 
-.basicInfo {
-  grid-area: basicInfo;
+.info {
+  grid-area: info;
 }
 
 .usernameContainer {
@@ -93,11 +93,12 @@
   .container {
     width: auto;
     grid-template-areas:
-      "picture basicInfo"
+      "picture info"
       "bio bio"
       "cta cta";
     gap: var(--xl-spacing) var(--l-spacing);
     grid-template-columns: 80px 1fr;
+    padding: 0 var(--m-spacing);
   }
 
   .profilePic {
