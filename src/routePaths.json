@@ -1,0 +1,4 @@
+{
+  "profile": "/users/:user",
+  "post": "/posts/:post"
+}
