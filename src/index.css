@@ -10,6 +10,7 @@
 
   /* Colors */
   --white: #fff;
+  --darker-gray: #8e8e8e;
   --dark-gray: #dbdbdb;
   --gray: #fafafa;
   --blue: #0095f6;
@@ -52,6 +53,10 @@ code {
 button {
   background: unset;
   border: unset;
+  margin: unset;
+  padding: unset;
+  cursor: pointer;
+  font-weight: var(--semi-bold);
 }
 
 ul {
@@ -66,8 +71,11 @@ a {
   text-decoration: none;
 }
 
+strong {
+  font-weight: var(--semi-bold);
+}
+
 .container {
   max-width: var(--width);
   margin: 0 auto;
-  padding-bottom: var(--xl-spacing);
 }

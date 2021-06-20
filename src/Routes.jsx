@@ -14,7 +14,7 @@ export default function Routes() {
       <Redirect
         exact
         from="/"
-        to={buildURL(routePaths.profile, { user: "chief" })}
+        to={buildURL(routePaths.profile, { username: "unsplash" })}
       />
       <Suspense fallback={<div>Loading...</div>}>
         <Route exact path={routePaths.profile} component={Profile} />

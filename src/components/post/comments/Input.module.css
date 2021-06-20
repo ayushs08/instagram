@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  padding-left: var(--m-spacing);
+}
+
+.icon {
+  color: var(--darker-gray);
+  width: 15px;
+  height: 15px;
+  margin-right: var(--s-spacing);
+  align-self: flex-end;
+  margin-bottom: var(--s-spacing);
+}
+
+.input {
+  padding: var(--s-spacing) 0 var(--s-spacing);
+  font-size: var(--regular-font-size);
+  border: unset;
+  outline: unset;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post {
+  font-weight: var(--semi-bold);
+  color: var(--blue);
+  padding: 0 var(--m-spacing);
+}
+
+.post:hover {
+  background: var(--gray);
+}

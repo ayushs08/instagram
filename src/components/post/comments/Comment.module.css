@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  margin-top: var(--l-spacing);
+}
+
+.container:first-child {
+  margin: unset;
+}
+
+.profilePic {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: var(--s-spacing);
+}
+
+.content {
+  flex: 1;
+  position: relative;
+  padding-right: 40px;
+  max-width: calc(100% - 40px);
+}
+
+.username {
+  font-weight: var(--semi-bold);
+}
+
+.comment {
+  font-size: var(--medium-font-size);
+  margin-bottom: var(--xs-spacing);
+}
+
+.likeButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.time,
+.replyButton {
+  font-size: var(--small-font-size);
+  margin-right: var(--s-spacing);
+  color: var(--darker-gray);
+}
+
+.inputContainer {
+  margin-top: var(--s-spacing);
+  border-bottom: 1px solid var(--dark-gray);
+  padding-left: unset;
+}
+
+.icon {
+  margin-bottom: var(--xs-spacing);
+}
+
+.input {
+  padding-bottom: var(--xs-spacing);
+  font-size: var(--medium-font-size);
+}
+
+.postButton {
+  font-size: var(--small-font-size);
+  padding: 0 var(--xs-spacing);
+}
+
+.repliesContainer {
+  width: 100%;
+  padding-left: var(--m-spacing);
+  margin-left: var(--m-spacing);
+  border-left: 1px solid var(--dark-gray);
+  max-width: calc(100% - var(--m-spacing));
+}
+
+.reply:first-child {
+  margin-top: var(--m-spacing);
+}

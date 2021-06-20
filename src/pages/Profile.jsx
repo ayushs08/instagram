@@ -1,4 +1,4 @@
-import userData from "data/user";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import MetaTitle from "components/MetaTitle";
@@ -6,29 +6,44 @@ import Header from "components/profile/Header";
 import PostsCollection from "components/profile/PostsCollection";
 
 export default function Profile() {
-  const { user } = useParams();
+  /**
+   * Ideally username should be taken from profileDetails
+   * this is simply to demonstrate the use of route params
+   */
+  const { username } = useParams();
+  const [loaded, setLoaded] = useState(false);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("profileDetails"));
+    setData(data);
+    setLoaded(true);
+  }, []);
+
+  if (!loaded) return "Loading...";
+
   const {
     biography,
     businessContact,
     followedByViewer,
-    followersCount,
-    followingCount,
+    followers,
+    following,
     fullName,
     posts,
+    postsCount,
     profilePicURL,
-    username,
-  } = userData;
+  } = data;
   return (
     <>
-      <MetaTitle title={`@${user} • Instagram`} />
+      <MetaTitle title={`@${username} • Instagram`} />
       <Header
         bio={biography}
         businessContact={businessContact}
-        followersCount={followersCount}
-        followingCount={followingCount}
+        followers={followers}
+        following={following}
         fullName={fullName}
         isFollowing={followedByViewer}
-        postsCount={posts.length}
+        postsCount={postsCount}
         profilePicURL={profilePicURL}
         username={username}
       />

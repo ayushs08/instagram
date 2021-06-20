@@ -1,28 +1,20 @@
 import PropTypes from "prop-types";
 import cx from "classnames";
 import LazyLoad from "react-lazyload";
-import { useParams } from "react-router-dom";
 
 import styles from "./Header.module.css";
 
 function Header(props) {
-  /**
-   * Ideally username should be taken from API data
-   * but to demonstrate the use of route params,
-   * username will be displayed from route params
-   * while rest of the data is static
-   */
-  const { user: username } = useParams();
-
   const {
     bio,
     businessContact,
     profilePicURL,
-    followersCount,
-    followingCount,
+    followers,
+    following,
     fullName,
     isFollowing,
     postsCount,
+    username,
   } = props;
   return (
     <header className={styles.container}>
@@ -41,11 +33,11 @@ function Header(props) {
             <div className={styles.semiBold}>{postsCount}</div>posts
           </li>
           <li className={styles.listItem}>
-            <div className={styles.semiBold}>{followersCount}</div>
+            <div className={styles.semiBold}>{followers}</div>
             followers
           </li>
           <li className={styles.listItem}>
-            <div className={styles.semiBold}>{followingCount}</div>
+            <div className={styles.semiBold}>{following}</div>
             following
           </li>
         </ul>
@@ -71,11 +63,11 @@ function Header(props) {
 Header.propTypes = {
   bio: PropTypes.string.isRequired,
   businessContact: PropTypes.string.isRequired,
-  followersCount: PropTypes.string.isRequired,
-  followingCount: PropTypes.string.isRequired,
+  followers: PropTypes.string.isRequired,
+  following: PropTypes.string.isRequired,
   fullName: PropTypes.string.isRequired,
   isFollowing: PropTypes.bool.isRequired,
-  postsCount: PropTypes.number.isRequired,
+  postsCount: PropTypes.string.isRequired,
   profilePicURL: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 };

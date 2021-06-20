@@ -51,16 +51,16 @@ function PostsCollection({ posts }) {
           [styles.singleColumn]: layout === "list",
         })}
       >
-        {posts.map(({ id, displayURL, likes, comments }) => (
+        {posts.map(({ uuid, imageURL, likes, comments }) => (
           <LazyLoad
             offset={100}
             once
             height={200}
-            key={id}
+            key={uuid}
             className={styles.post}
           >
-            <Link to={buildURL(routePaths.post, { post: id })}>
-              <img src={displayURL} alt="" className={styles.media} />
+            <Link to={buildURL(routePaths.post, { uuid })}>
+              <img src={imageURL} alt="" className={styles.media} />
               <ul className={styles.stats}>
                 <li className={styles.listItem}>
                   <Heart className={styles.icon} />

@@ -5,6 +5,7 @@
     "picture bio"
     "cta cta";
   gap: 0 calc(var(--s-spacing) * 10);
+  margin-top: var(--xl-spacing);
 }
 
 .profilePic {
@@ -99,6 +100,7 @@
     gap: var(--xl-spacing) var(--l-spacing);
     grid-template-columns: 80px 1fr;
     padding: 0 var(--m-spacing);
+    margin-top: var(--m-spacing);
   }
 
   .profilePic {

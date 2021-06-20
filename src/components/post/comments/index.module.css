@@ -1,0 +1,12 @@
+.container {
+  padding: var(--m-spacing);
+  padding-right: var(--xs-spacing);
+  overflow: auto;
+  border-bottom: 1px solid var(--dark-gray);
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-height: 320px;
+  }
+}

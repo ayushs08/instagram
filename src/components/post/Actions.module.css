@@ -1,0 +1,24 @@
+.container {
+  padding: var(--xs-spacing);
+  padding-bottom: var(--m-spacing);
+}
+
+.flex {
+  display: flex;
+}
+
+.icon {
+  margin-right: var(--s-spacing);
+  padding: unset;
+}
+
+.icon:last-child {
+  margin-right: unset;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.likes {
+  margin-top: var(--xs-spacing);
+  margin-left: var(--s-spacing);
+}

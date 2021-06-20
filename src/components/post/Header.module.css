@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profilePic {
+  border-radius: 50%;
+  margin-right: var(--m-spacing);
+  background: var(--dark-gray);
+}
+
+.username {
+  font-size: var(--medium-font-size);
+  font-weight: var(--semi-bold);
+  color: #000;
+  line-height: 1.5;
+}
+
+.location {
+  font-size: var(--small-font-size);
+}
+
+.dots {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: var(--large-font-size);
+}
