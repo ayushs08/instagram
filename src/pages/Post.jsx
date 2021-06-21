@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { v4 as getUUID } from "uuid";
 
 import MetaTitle from "components/MetaTitle";
 import Header from "components/post/Header";
@@ -49,12 +50,16 @@ export default function Post() {
     time,
   } = data;
 
-  const handleLike = () => {
-    const updatedData = { ...data, likedByViewer: !likedByViewer };
+  const updateStorage = (updatedData) => {
     setData(updatedData);
     const updatedPostsDetails = getPostsDetails();
     updatedPostsDetails.splice(index, 1, updatedData);
     setPostsDetails(updatedPostsDetails);
+  };
+
+  const handleLike = () => {
+    const updatedPostData = { ...data, likedByViewer: !likedByViewer };
+    updateStorage(updatedPostData);
   };
 
   const handleCommentLike = (index) => {};
@@ -63,7 +68,17 @@ export default function Post() {
     inputRef.current.focus();
   };
 
-  const handleComment = () => {};
+  const handleComment = (comment) => {
+    const commentData = {
+      comment,
+      uuid: getUUID(),
+      time: new Date().toDateString(),
+      username,
+      profilePicURL,
+    };
+    const updatedPostData = { ...data, comments: [...comments, commentData] };
+    updateStorage(updatedPostData);
+  };
 
   return (
     <>

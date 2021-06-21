@@ -76,19 +76,22 @@ function Comment(props) {
 }
 
 Comment.propTypes = {
-  comment: PropTypes.string.isRequired,
   profilePicURL: PropTypes.string.isRequired,
-  className: PropTypes.string,
   time: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   uuid: PropTypes.string.isRequired,
-  likedByViewer: PropTypes.bool.isRequired,
+  comment: PropTypes.string.isRequired,
   onLike: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  likedByViewer: PropTypes.bool,
   index: PropTypes.number.isRequired,
+  replies: PropTypes.array,
 };
 
 Comment.defaultProps = {
   className: "",
+  replies: [],
+  likedByViewer: false,
 };
 
 export default Comment;
