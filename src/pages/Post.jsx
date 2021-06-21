@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { v4 as getUUID } from "uuid";
 
 import MetaTitle from "components/MetaTitle";
+import Loader from "components/Loader";
 import Header from "components/post/Header";
 import Comments from "components/post/comments";
 import Actions from "components/post/Actions";
@@ -43,7 +44,7 @@ export default function Post() {
     })();
   }, [uuid]);
 
-  if (!loaded) return "Loading...";
+  if (!loaded) return <Loader />;
 
   const {
     displayURL,

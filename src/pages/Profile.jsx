@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import MetaTitle from "components/MetaTitle";
+import Loader from "components/Loader";
 import Header from "components/profile/Header";
 import PostsCollection from "components/profile/PostsCollection";
 
@@ -27,7 +28,7 @@ export default function Profile() {
     })();
   }, []);
 
-  if (!loaded) return "Loading...";
+  if (!loaded) return <Loader />;
 
   const {
     biography,
