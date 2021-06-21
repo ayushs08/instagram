@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as getUUID } from "uuid";
 
+import timeFormat from "utils/timeFormat";
+
 import MetaTitle from "components/MetaTitle";
 import Loader from "components/Loader";
 import Header from "components/post/Header";
@@ -67,12 +69,12 @@ export default function Post() {
   };
 
   const handleLike = () => {
-    const isLiked = !likedByViewer;
+    const isLiked = likedByViewer;
     const _likeCount = Number(likeCount);
-    const updatedLikeCount = isLiked ? _likeCount + 1 : _likeCount - 1;
+    const updatedLikeCount = isLiked ? _likeCount - 1 : _likeCount + 1;
     const updatedPostData = {
       ...data,
-      likedByViewer: isLiked,
+      likedByViewer: !isLiked,
       likeCount: String(updatedLikeCount),
     };
     updateStorage(updatedPostData);
@@ -90,10 +92,11 @@ export default function Post() {
   const getCommentData = (comment) => ({
     comment,
     uuid: getUUID(),
-    time: new Date().toDateString(),
+    time: new Date().toString(),
     username,
     profilePicURL,
     replies: [],
+    likeCount: "0",
   });
 
   const handleComment = (comment) => {
@@ -104,8 +107,12 @@ export default function Post() {
 
   const handleCommentLike = ({ index: commentIndex }) => {
     const updatedComments = [...comments];
-    updatedComments[commentIndex].likedByViewer =
-      !updatedComments[commentIndex].likedByViewer;
+    const item = updatedComments[commentIndex];
+    const isLiked = item.likedByViewer;
+    item.likedByViewer = !isLiked;
+    const _likeCount = Number(item.likeCount);
+    const updatedLikeCount = isLiked ? _likeCount - 1 : _likeCount + 1;
+    item.likeCount = String(updatedLikeCount);
     updateComments(updatedComments);
   };
 
@@ -119,7 +126,11 @@ export default function Post() {
             item.replies.push(replyData);
             break;
           case "like":
-            item.likedByViewer = !item.likedByViewer;
+            const isLiked = item.likedByViewer;
+            item.likedByViewer = !isLiked;
+            const _likeCount = Number(item.likeCount);
+            const updatedLikeCount = isLiked ? _likeCount - 1 : _likeCount + 1;
+            item.likeCount = String(updatedLikeCount);
             break;
           default:
             break;
@@ -157,7 +168,7 @@ export default function Post() {
               __html: caption.replace(/\n/g, "<br />"),
             }}
           ></div>
-          <div className={styles.time}>{new Date(time).toDateString()}</div>
+          <div className={styles.time}>{timeFormat(time, true)}</div>
         </div>
         <Comments
           comments={comments}

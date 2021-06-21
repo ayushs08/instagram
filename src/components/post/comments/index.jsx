@@ -1,10 +1,10 @@
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
 import Comment from "./Comment";
 
 import styles from "./index.module.css";
-import { useEffect, useRef } from "react";
 
 function Comments(props) {
   const { className, comments, ...restProps } = props;

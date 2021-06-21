@@ -40,10 +40,16 @@
 }
 
 .time,
+.likeCount,
 .replyButton {
   font-size: var(--small-font-size);
-  margin-right: var(--s-spacing);
   color: var(--darker-gray);
+}
+
+.time::after,
+.likeCount::after {
+  content: "•";
+  margin: 0 var(--xs-spacing);
 }
 
 .inputContainer {

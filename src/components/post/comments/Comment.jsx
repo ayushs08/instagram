@@ -2,6 +2,9 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import LazyLoad from "react-lazyload";
 import cx from "classnames";
+import pluralize from "pluralize";
+
+import timeFormat from "utils/timeFormat";
 
 import Input from "./Input";
 import Like from "components/post/Like";
@@ -23,6 +26,7 @@ function Comment(props) {
     onReply,
     onReplyLike,
     depth,
+    likeCount,
   } = props;
 
   const [showInput, setShowInput] = useState(false);
@@ -51,7 +55,12 @@ function Comment(props) {
             width="15"
             className={styles.likeButton}
           />
-          <span className={styles.time}>{new Date(time).toDateString()}</span>
+          <span className={styles.time}>{timeFormat(time)}</span>
+          {Number(likeCount) > 0 && (
+            <span className={styles.likeCount}>
+              {likeCount}&nbsp;{pluralize("like", Number(likeCount))}
+            </span>
+          )}
           <button className={styles.replyButton} onClick={handleReplyClick}>
             Reply
           </button>
@@ -103,6 +112,7 @@ Comment.propTypes = {
   onReply: PropTypes.func.isRequired,
   onReplyLike: PropTypes.func,
   depth: PropTypes.number,
+  likeCount: PropTypes.string.isRequired,
 };
 
 Comment.defaultProps = {
