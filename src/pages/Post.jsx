@@ -58,26 +58,72 @@ export default function Post() {
   };
 
   const handleLike = () => {
-    const updatedPostData = { ...data, likedByViewer: !likedByViewer };
+    const isLiked = !likedByViewer;
+    const updatedLikeCount = isLiked
+      ? Number(likeCount) + 1
+      : Number(likeCount) - 1;
+    const updatedPostData = {
+      ...data,
+      likedByViewer: isLiked,
+      likeCount: String(updatedLikeCount),
+    };
     updateStorage(updatedPostData);
   };
 
-  const handleCommentLike = (index) => {};
+  const updateComments = (updatedComments) => {
+    const updatedPostData = { ...data, comments: updatedComments };
+    updateStorage(updatedPostData);
+  };
 
   const handleCommentButton = () => {
     inputRef.current.focus();
   };
 
+  const getCommentData = (comment) => ({
+    comment,
+    uuid: getUUID(),
+    time: new Date().toDateString(),
+    username,
+    profilePicURL,
+    replies: [],
+  });
+
   const handleComment = (comment) => {
-    const commentData = {
-      comment,
-      uuid: getUUID(),
-      time: new Date().toDateString(),
-      username,
-      profilePicURL,
-    };
-    const updatedPostData = { ...data, comments: [...comments, commentData] };
-    updateStorage(updatedPostData);
+    const commentData = getCommentData(comment);
+    const updatedComments = [...comments, commentData];
+    updateComments(updatedComments);
+  };
+
+  const handleCommentLike = ({ index: commentIndex }) => {
+    const updatedComments = [...comments];
+    updatedComments[commentIndex].likedByViewer =
+      !updatedComments[commentIndex].likedByViewer;
+    updateComments(updatedComments);
+  };
+
+  const handleReply = ({ reply, uuid }) => {
+    const updatedComments = [...comments];
+    updatedComments.forEach(function updateReplies(item) {
+      if (item.uuid === uuid) {
+        const replyData = getCommentData(reply);
+        item.replies.push(replyData);
+      } else {
+        item.replies.forEach(updateReplies);
+      }
+    });
+    updateComments(updatedComments);
+  };
+
+  const handleReplyLike = ({ uuid }) => {
+    const updatedComments = [...comments];
+    updatedComments.forEach(function updateReplies(item) {
+      if (item.uuid === uuid) {
+        item.likedByViewer = !item.likedByViewer;
+      } else {
+        item.replies.forEach(updateReplies);
+      }
+    });
+    updateComments(updatedComments);
   };
 
   return (
@@ -98,12 +144,14 @@ export default function Post() {
               __html: caption.replace(/\n/g, "<br />"),
             }}
           ></div>
-          <div className={styles.time}>{time}</div>
+          <div className={styles.time}>{new Date(time).toDateString()}</div>
         </div>
         <Comments
           comments={comments}
           className={styles.comments}
           onLike={handleCommentLike}
+          onReply={handleReply}
+          onReplyLike={handleReplyLike}
         />
         <Actions
           className={styles.actions}

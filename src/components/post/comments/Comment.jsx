@@ -20,10 +20,19 @@ function Comment(props) {
     replies,
     className,
     index,
+    onReply,
+    onReplyLike,
+    depth,
   } = props;
 
   const [showInput, setShowInput] = useState(false);
-  const handleReply = () => setShowInput(!showInput);
+
+  const handleReplyClick = () => setShowInput(!showInput);
+
+  const handleReplySubmit = (reply) => {
+    setShowInput(false);
+    onReply({ reply, uuid });
+  };
 
   return (
     <>
@@ -37,13 +46,13 @@ function Comment(props) {
             {comment}
           </div>
           <Like
-            onLike={() => onLike(index)}
+            onLike={() => onLike({ index, uuid })}
             liked={likedByViewer}
             width="15"
             className={styles.likeButton}
           />
-          <span className={styles.time}>{time}</span>
-          <button className={styles.replyButton} onClick={handleReply}>
+          <span className={styles.time}>{new Date(time).toDateString()}</span>
+          <button className={styles.replyButton} onClick={handleReplyClick}>
             Reply
           </button>
           {showInput && (
@@ -55,22 +64,27 @@ function Comment(props) {
                 icon: styles.icon,
               }}
               autoFocus
+              onSubmit={handleReplySubmit}
             />
           )}
         </div>
       </div>
-      <div className={styles.repliesContainer}>
-        {replies.length > 0 &&
-          replies.map((item, index) => (
+      {replies.length > 0 && (
+        <div className={styles.repliesContainer}>
+          {replies.map((item, replyIndex) => (
             <Comment
               key={item.uuid}
               {...item}
-              onLike={onLike}
-              index={index}
+              index={replyIndex}
+              onLike={onReplyLike}
               className={styles.reply}
+              onReply={onReply}
+              depth={depth + 1}
+              onReplyLike={onReplyLike}
             />
           ))}
-      </div>
+        </div>
+      )}
     </>
   );
 }
@@ -86,12 +100,17 @@ Comment.propTypes = {
   likedByViewer: PropTypes.bool,
   index: PropTypes.number.isRequired,
   replies: PropTypes.array,
+  onReply: PropTypes.func.isRequired,
+  onReplyLike: PropTypes.func,
+  depth: PropTypes.number,
 };
 
 Comment.defaultProps = {
   className: "",
   replies: [],
   likedByViewer: false,
+  depth: 1,
+  onReplyLike: null,
 };
 
 export default Comment;

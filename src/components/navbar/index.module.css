@@ -1,10 +1,14 @@
 .container {
-  padding: var(--s-spacing) calc((100vw - var(--width)) / 2) var(--xs-spacing);
+  padding: var(--s-spacing) calc((100vw - var(--width)) / 2);
   border-bottom: 1px solid var(--dark-gray);
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--white);
+}
+
+.logo {
+  margin-bottom: -2px;
 }
 
 .input {

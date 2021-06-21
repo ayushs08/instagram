@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <nav className={styles.container}>
-      <img src={Logo} alt="Instagram" height="29" />
+      <img src={Logo} alt="Instagram" height="29" className={styles.logo} />
       <form onSubmit={handleSubmit}>
         <input
           type="text"
