@@ -24,15 +24,23 @@ export default function Post() {
     localStorage.setItem("postsDetails", JSON.stringify(data));
 
   useEffect(() => {
-    const data = getPostsDetails().find((item, index) => {
-      if (item.uuid === uuid) {
-        setIndex(index);
-        return true;
+    let postsDetails = getPostsDetails();
+    (async () => {
+      if (!postsDetails) {
+        const module = await import("data/postsDetails.json");
+        postsDetails = module.default.details;
+        setPostsDetails(postsDetails);
       }
-      return false;
-    });
-    setData(data);
-    setLoaded(true);
+      const data = postsDetails.find((item, index) => {
+        if (item.uuid === uuid) {
+          setIndex(index);
+          return true;
+        }
+        return false;
+      });
+      setData(data);
+      setLoaded(true);
+    })();
   }, [uuid]);
 
   if (!loaded) return "Loading...";
@@ -59,9 +67,8 @@ export default function Post() {
 
   const handleLike = () => {
     const isLiked = !likedByViewer;
-    const updatedLikeCount = isLiked
-      ? Number(likeCount) + 1
-      : Number(likeCount) - 1;
+    const _likeCount = Number(likeCount);
+    const updatedLikeCount = isLiked ? _likeCount + 1 : _likeCount - 1;
     const updatedPostData = {
       ...data,
       likedByViewer: isLiked,
@@ -101,12 +108,21 @@ export default function Post() {
     updateComments(updatedComments);
   };
 
-  const handleReply = ({ reply, uuid }) => {
+  const updateReplies = ({ reply, uuid, type }) => {
     const updatedComments = [...comments];
     updatedComments.forEach(function updateReplies(item) {
       if (item.uuid === uuid) {
-        const replyData = getCommentData(reply);
-        item.replies.push(replyData);
+        switch (type) {
+          case "add":
+            const replyData = getCommentData(reply);
+            item.replies.push(replyData);
+            break;
+          case "like":
+            item.likedByViewer = !item.likedByViewer;
+            break;
+          default:
+            break;
+        }
       } else {
         item.replies.forEach(updateReplies);
       }
@@ -114,16 +130,12 @@ export default function Post() {
     updateComments(updatedComments);
   };
 
-  const handleReplyLike = ({ uuid }) => {
-    const updatedComments = [...comments];
-    updatedComments.forEach(function updateReplies(item) {
-      if (item.uuid === uuid) {
-        item.likedByViewer = !item.likedByViewer;
-      } else {
-        item.replies.forEach(updateReplies);
-      }
-    });
-    updateComments(updatedComments);
+  const handleReply = (params) => {
+    updateReplies({ ...params, type: "add" });
+  };
+
+  const handleReplyLike = (params) => {
+    updateReplies({ ...params, type: "like" });
   };
 
   return (

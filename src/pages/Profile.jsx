@@ -15,9 +15,16 @@ export default function Profile() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("profileDetails"));
-    setData(data);
-    setLoaded(true);
+    let profileDetails = JSON.parse(localStorage.getItem("profileDetails"));
+    (async () => {
+      if (!profileDetails) {
+        const module = await import("data/profileDetails.json");
+        profileDetails = module.default;
+        localStorage.setItem("profileDetails", JSON.stringify(profileDetails));
+      }
+      setData(profileDetails);
+      setLoaded(true);
+    })();
   }, []);
 
   if (!loaded) return "Loading...";
