@@ -5,7 +5,7 @@ import Navbar from "components/navbar";
 
 function App() {
   return (
-    <Router basename="/instagram">
+    <Router>
       <Navbar />
       <div className="container">
         <Routes />
